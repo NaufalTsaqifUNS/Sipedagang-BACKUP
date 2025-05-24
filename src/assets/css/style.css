@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+@theme {
+  --font-inter: 'Inter', 'sans-serif';
+  --font-poppins: 'Poppins', 'sans-serif';
+  --breakpoint-3xl: 120rem;
+}

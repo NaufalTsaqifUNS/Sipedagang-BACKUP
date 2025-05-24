@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiPEDAGANG - Fallback Page</title>
+  <style>
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    
+    h1 {
+      color: #0099FF;
+      margin-bottom: 20px;
+    }
+    
+    h2 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+    
+    .error-list {
+      background: #f5f5f5;
+      border-radius: 5px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: left;
+    }
+    
+    .error-list h3 {
+      margin-top: 0;
+      color: #ff3333;
+    }
+    
+    .error-list ul {
+      margin-bottom: 0;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: #0099FF;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      border: none;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .btn:hover {
+      background: #0088ee;
+    }
+    
+    .solutions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .solution-card {
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 20px;
+      width: 200px;
+      text-align: left;
+    }
+    
+    .solution-card h4 {
+      color: #0099FF;
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SiPEDAGANG</h1>
+    <h2>Oops! Terjadi Masalah dengan Aplikasi</h2>
+    
+    <p>Aplikasi tidak dapat dimuat dengan benar. Berikut adalah beberapa kemungkinan penyebabnya:</p>
+    
+    <div class="error-list">
+      <h3>Kemungkinan Masalah:</h3>
+      <ul>
+        <li>Koneksi ke server API tidak berhasil</li>
+        <li>Terjadi kesalahan saat memproses CSRF token</li>
+        <li>Browser Anda mungkin memblokir cookie yang diperlukan</li>
+        <li>Terjadi kesalahan JavaScript saat memuat aplikasi</li>
+      </ul>
+    </div>
+    
+    <button class="btn" onclick="location.reload()">Coba Muat Ulang</button>
+    <button class="btn" onclick="clearLocalStorage()">Hapus Cache & Muat Ulang</button>
+    
+    <div class="solutions">
+      <div class="solution-card">
+        <h4>Masalah Cookie</h4>
+        <p>Pastikan browser Anda mengizinkan cookie dari domain ini. Periksa pengaturan privasi browser Anda.</p>
+      </div>
+      <div class="solution-card">
+        <h4>Masalah Koneksi</h4>
+        <p>Pastikan Anda memiliki koneksi internet yang stabil dan server API sedang berjalan.</p>
+      </div>
+      <div class="solution-card">
+        <h4>Browser Tidak Kompatibel</h4>
+        <p>Coba gunakan browser modern lain seperti Chrome, Firefox, atau Edge terbaru.</p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function clearLocalStorage() {
+      // Clear all stored data
+      localStorage.clear();
+      sessionStorage.clear();
+      
+      // Clear all cookies related to the app
+      document.cookie.split(";").forEach(function(c) {
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+      });
+      
+      // Reload the page
+      location.reload();
+    }
+    
+    // Check if we can load the main app
+    setTimeout(function() {
+      const app = document.getElementById('app');
+      if (!app || (app && !app.childNodes.length)) {
+        window.location.href = '/fallback.html';
+      }
+    }, 10000);
+  </script>
+</body>
+</html>
